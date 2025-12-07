@@ -4,7 +4,7 @@ import React from "react";
 export default function ProductCard() {
   return (
     <div className="rounded-2xl shadow-lg bg-white overflow-hidden">
-      <div className="w-full h-[180px] relative  overflow-hidden">
+      <div className="w-full  relative  overflow-hidden">
         <img
           src="/assets/bosch.jpg"
           alt="Product Image"
@@ -28,7 +28,7 @@ export default function ProductCard() {
           <span className="text-gray-600 text-sm ml-1">(4.0)</span>
         </div>
 
-        <button className="w-full mt-4 bg-primary text-white py-3 rounded-lg hover:bg-dark transition">
+        <button className="w-full mt-4 bg-primary text-white py-3 rounded-lg hover:bg-dark transition ease-in-out duration-300 cursor-pointer">
           Check Details
         </button>
       </div>
