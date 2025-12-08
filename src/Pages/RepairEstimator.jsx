@@ -3,17 +3,7 @@ import RepairCostCard from "../components/RepairCostCard";
 import { repairCosts } from "../assets/data";
 import { FaChevronDown } from "react-icons/fa";
 
-// {
-//     id: 5,
-//     name: "Spark Plugs",
-//     category: "Ignition System",
-//     brand: "Toyota",
-//     vehicle: "Camry 2007 - 2011",
-//     priceRange: "₦1,500 - ₦4,500",
-//     rating: 4.4,
-//     seller: "AutoCare Hub",
-//     image: "/images/spareparts/spark-plugs.jpg",
-//   },
+
 
 const RepairEstimator = () => {
   const repairCategories = [
@@ -37,14 +27,14 @@ const RepairEstimator = () => {
   //
   //
   const filteredData = repairCosts.filter((item) => {
-    const matchRepairCategory = filters.category
-      ? item.category === filters.category
+    const matchRepairCategory = filters.repairCategory
+      ? item.category === filters.repairCategory
       : true;
     const matchBrand = filters.brand ? item.brand === filters.brand : true;
     const matchPriceRange = filters.priceRange
       ? item.priceRange === filters.priceRange
       : true;
-    const matchVehicle = filters.vechicle
+    const matchVehicle = filters.vehicle
       ? item.vehicle === filters.vehicle
       : true;
 

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 export default function DashboardNavbar() {
   const [openDropdown, setOpenDropdown] = useState(false);
   const dropdownRef = useRef(null);
-  const navigate = useNavigate();
+  const navigate= useNavigate()
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -47,10 +47,7 @@ export default function DashboardNavbar() {
         </button>
 
         {/* Cart */}
-        <button
-          onClick={() => navigate("/dashboard/cart")}
-          className="relative"
-        >
+        <button  onClick={()=>navigate("/dashboard/cart")}  className="relative">
           <IoMdCart className="text-[22px] text-gray-700 hover:text-primary transition" />
           <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
         </button>
