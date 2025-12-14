@@ -1,7 +1,7 @@
 const Header = ({route, subRoute}) => {
     return (
-        <div className="px-6 pt-6 pb-3 border-b border-gray-200">
-            <div className="text-sm flex gap-2 items-center text-gray-500">
+        <div className="border-b border-gray-200">
+            <div className="px-6 pt-6 pb-3 text-sm flex gap-2 items-center text-gray-500">
                 <span>{route}</span>
                 <span>/</span>
 
@@ -13,7 +13,8 @@ const Header = ({route, subRoute}) => {
                     <span className="absolute left-0 -bottom-3 w-full h-0.5 bg-blue-600 rounded-full"/>
         </span>
             </div>
-        </div>);
+        </div>
+    );
 };
 
 export default Header;
