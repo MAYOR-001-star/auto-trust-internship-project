@@ -1,4 +1,6 @@
 import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {bookingSchema} from "../validations/validations.js";
 
 export default function BookingModal({
                                          onClose,
@@ -6,7 +8,14 @@ export default function BookingModal({
                                          estimatedPrice,
                                          duration,
                                      }) {
-    const {register, handleSubmit} = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm({
+        resolver: zodResolver(bookingSchema),
+        mode: "onChange",
+    });
 
     const onSubmit = (data) => {
         console.log("Booking Submitted:", data);
@@ -15,7 +24,6 @@ export default function BookingModal({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-6">
-
             {/* Overlay */}
             <div
                 className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -23,8 +31,7 @@ export default function BookingModal({
             />
 
             {/* Modal */}
-            <div className="relative z-50 w-full max-w-lg rounded-xl bg-white shadow-lg
-                      max-h-[90vh] overflow-y-auto">
+            <div className="relative z-50 w-full max-w-lg rounded-xl bg-white shadow-lg max-h-[90vh] overflow-y-auto">
 
                 {/* Close Button */}
                 <button
@@ -38,24 +45,24 @@ export default function BookingModal({
                     />
                 </button>
 
-                {/* Content Padding */}
                 <div className="p-5 sm:p-6">
-                    <h2 className="mb-5 text-lg sm:text-xl font-semibold">
-                        Book Service
-                    </h2>
+                    <h2 className="mb-5 text-lg sm:text-xl font-semibold">Book Service</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
-
                         {/* Vehicle */}
                         <div>
                             <label className="text-sm font-medium">Select Vehicle</label>
                             <select
-                                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm"
+                                className={`mt-1 w-full rounded-lg border px-3 py-2 text-sm
+                  ${errors.vehicle ? "border-red-500" : "border-gray-300"}`}
                                 {...register("vehicle")}
                             >
-                                <option>Toyota Corolla 2018</option>
-                                <option>Honda Civic 2020</option>
+                                <option value="Toyota Corolla 2018">Toyota Corolla 2018</option>
+                                <option value="Honda Civic 2020">Honda Civic 2020</option>
                             </select>
+                            {errors.vehicle && (
+                                <p className="mt-1 text-xs text-red-600">{errors.vehicle.message}</p>
+                            )}
                         </div>
 
                         {/* Date */}
@@ -63,35 +70,44 @@ export default function BookingModal({
                             <label className="text-sm font-medium">Preferred Date</label>
                             <input
                                 type="date"
-                                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm"
+                                className={`mt-1 w-full rounded-lg border px-3 py-2 text-sm
+                  ${errors.date ? "border-red-500" : "border-gray-300"}`}
                                 {...register("date")}
                             />
+                            {errors.date && (
+                                <p className="mt-1 text-xs text-red-600">{errors.date.message}</p>
+                            )}
                         </div>
 
                         {/* Time */}
                         <div>
                             <label className="text-sm font-medium">Preferred Time</label>
                             <select
-                                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm"
+                                className={`mt-1 w-full rounded-lg border px-3 py-2 text-sm
+                  ${errors.time ? "border-red-500" : "border-gray-300"}`}
                                 {...register("time")}
                             >
-                                <option>8:00AM - 10:00AM</option>
-                                <option>10:00AM - 12:00PM</option>
-                                <option>12:00PM - 2:00PM</option>
+                                <option value="8:00AM - 10:00AM">8:00AM - 10:00AM</option>
+                                <option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option>
+                                <option value="12:00PM - 2:00PM">12:00PM - 2:00PM</option>
                             </select>
+                            {errors.time && (
+                                <p className="mt-1 text-xs text-red-600">{errors.time.message}</p>
+                            )}
                         </div>
 
                         {/* Notes */}
                         <div>
-                            <label className="text-sm font-medium">
-                                Additional Notes (Optional)
-                            </label>
+                            <label className="text-sm font-medium">Additional Notes (Optional)</label>
                             <textarea
                                 rows={3}
-                                placeholder="Any specific concerns or requests..."
-                                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm"
+                                className={`mt-1 w-full rounded-lg border px-3 py-2 text-sm
+                  ${errors.notes ? "border-red-500" : "border-gray-300"}`}
                                 {...register("notes")}
                             />
+                            {errors.notes && (
+                                <p className="mt-1 text-xs text-red-600">{errors.notes.message}</p>
+                            )}
                         </div>
 
                         {/* Summary */}
@@ -116,10 +132,11 @@ export default function BookingModal({
                         <button
                             type="submit"
                             className="mt-3 w-full rounded-lg bg-blue-600 py-3 text-sm sm:text-base
-                         font-medium text-white hover:bg-blue-700 transition"
+                font-medium text-white hover:bg-blue-700 transition"
                         >
                             Confirm Booking
                         </button>
+
                     </form>
                 </div>
             </div>
