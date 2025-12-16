@@ -11,6 +11,10 @@ import RepairEstimator from "./Pages/RepairEstimator";
 import ServiceHistory from "./Pages/ServiceHistory";
 import Cart from "./Pages/Cart";
 import Profile from "./Pages/Profile";
+import CheckoutLayout from "./layout/CheckoutLayout.jsx";
+import DeliveryInfo from "./Pages/DeliveryInfo";
+import Payment from "./Pages/Payment";
+import Review from "./Pages/Review.jsx";
 
 function App() {
     return (
@@ -33,6 +37,11 @@ function App() {
                     <Route path="repair-estimator" element={<RepairEstimator/>}/>
                     <Route path="service-history" element={<ServiceHistory/>}/>
                     <Route path="cart" element={<Cart/>}/>
+                    <Route path="shopping-cart" element={<CheckoutLayout/>}>
+                        <Route path="checkout" element={<DeliveryInfo/>}/>
+                        <Route path="payment" element={<Payment/>}/>
+                        <Route path="review" element={<Review/>}/>
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>
